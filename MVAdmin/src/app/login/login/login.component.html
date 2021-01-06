@@ -1,0 +1,42 @@
+<div id="divFondo">
+  <img src="assets/fondo.png" alt="" id="fondoDiv">
+    <div class="" id="containerLogo">
+      <div id="formCol">
+          <div id="divImg">
+            <img src="assets/icons/LOGO.png" alt="" id="fondoImg">
+          </div>
+          <div id="divForm">
+            <form [formGroup]="form_login" (submit)="submit()">
+              <div class="divInput">
+                <div class="form-group">
+                  <input formControlName="username" placeholder="nombre de usuario"  type="text" id="email_address" class="form-control" name="username-address" required autofocus>
+                </div>
+                <span class="text-danger small" *ngIf="form_login.controls['username'].touched && form_login.controls['username'].hasError('required')">
+                  Username es requerido! </span>
+
+                <div class="form-group">
+                  <input formControlName="contrasena" placeholder="contraseña" type="password" id="password" class="form-control" name="password" required>
+                </div>
+                <span class="text-danger small" *ngIf="form_login.controls['contrasena'].touched && form_login.controls['contrasena'].hasError('required')">
+                  Contraseña es requerida! </span>
+              </div>
+              <div id="divContrasena">
+                <small> 
+                  <b>
+                    <a routerLink="/recuperarContrasena" class="btn btn-link">
+                      ¿Olvidaste la contraseña?
+                    </a>
+                  </b>
+                </small>
+              </div>
+              <div id="divButton">
+                <button [disabled]="!this.form_login.valid" type="submit" class="btn">
+                  Iniciar Sesión
+                </button>
+              </div>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
+  

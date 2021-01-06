@@ -1,0 +1,140 @@
+<div class="card">
+    <div class="card-body">
+        <div class="container">
+            <div class="about-heading-content">
+                <div class="row">
+                    <div class="col-xl-11 col-lg-11 mx-auto">
+                        <div class="bg-faded rounded p-3">
+                            <div class="form-row">
+                                <div class="espacioH">
+                                    <h2 class="section-heading mb-4">
+                                        <span class="section-heading-lower titulo font-weight-bold">CONFIGURACIÓN DEL PERFIL</span>  
+                                    </h2>
+                                </div>
+                                <div ><h5 class="mt-2 mr-5 editar"><fa-icon type="button" data-toggle="tooltip" data-placement="bottom" title="De click para editar" [icon]="faEdit" (click) = "edForm()"></fa-icon></h5></div>
+                            </div>
+                            <br>
+                            <form [formGroup]="form_p_configuracion" (ngSubmit)="onSubmit()">
+                                <div class="form-row">
+                                    <div class="form-group col-4">
+                                        <div class="col-11"><label for="nombre" class="col-form-label font-weight-bold">Nombre:</label></div>
+                                        <div class="col-11">
+                                            <input formControlName="nombre" type="text"  class="form-control ">
+                                            <span class="text-danger" *ngIf="form_p_configuracion.controls['nombre'].touched && form_p_configuracion.controls['nombre'].hasError('required')">
+                                                Nombre es requerido! </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <div class="col-11"><label for="apellido" class="col-form-label font-weight-bold">Apellido:</label></div>
+                                        <div class="col-11">
+                                            <input formControlName="apellido" type="text" class="form-control ">
+                                            <span class="text-danger" *ngIf="form_p_configuracion.controls['apellido'].touched && form_p_configuracion.controls['apellido'].hasError('required')">
+                                                Apellido es requerido! </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <div class="col-11"><label for="usuario" class="col-form-label font-weight-bold">Usuario:</label></div>
+                                        <div class="col-11">
+                                            <input formControlName="usuario" type="text" class="form-control ">
+                                            <span class="text-danger" *ngIf="form_p_configuracion.controls['usuario'].touched && form_p_configuracion.controls['usuario'].hasError('required')">
+                                                Usuario es requerido! </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-row">
+                                    <div class="form-group col-4">
+                                        <div class="col-11"><label for="correo" class="col-form-label font-weight-bold">Email:</label></div>
+                                        <div class="col-11">
+                                            <input formControlName="correo" type="text"  class="form-control ">
+                                            <span class="text-danger" *ngIf="form_p_configuracion.controls['correo'].touched && form_p_configuracion.controls['correo'].hasError('required')">
+                                                Email es requerido! </span>
+                                            <span class="text-danger" *ngIf="form_p_configuracion.controls['correo'].touched && form_p_configuracion.controls['correo'].hasError('email')">
+                                                Email no valido! </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <div class="col-11"><label for="contrasena" class="col-form-label font-weight-bold">Contraseña:</label></div>
+                                        <div class="col-11">
+                                            <input 
+                                                id="contrasena"
+                                                formControlName="contrasena" 
+                                                type="password" 
+                                                class="form-control "
+                                                [ngClass]="{'is-invalid':f.contrasena.errors && (f.contrasena.touched || f.contrasena.dirty) }"
+                                            >
+                                            <span class="text-danger" *ngIf="form_p_configuracion.controls.contrasena.touched && form_p_configuracion.controls.contrasena.hasError('required')">
+                                                Contraseña es requerida! </span>
+                                            <span *ngIf="(f.contrasena.touched || f.contrasena.dirty) && f.contrasena.hasError('min_len_Pass')" 
+                                            class="text-danger"><small>La contrasena debe tener minimo 6 carácteres</small> </span>
+
+                                        </div> 
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <div class="col-11"><label for="conf_contrasena" class="col-form-label font-weight-bold">Confirmar contraseña:</label></div>
+                                        <div class="col-11">
+                                            <input 
+                                                id="conf_contrasena"
+                                                formControlName="conf_contrasena" 
+                                                type="password" 
+                                                class="form-control "
+                                                [ngClass]="{'is-invalid':f.conf_contrasena.errors && f.conf_contrasena.touched}"
+                                            >
+                                            <span class="text-danger" *ngIf="f.conf_contrasena.hasError('passwordMismatch') && (f.conf_contrasena.touched|| 
+                                            f.conf_contrasena.dirty || f.contrasena.touched || f.contrasena.dirty)">
+                                                <small>No concuerdan las contraseñas!</small> </span>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-row">
+                                    <div class="form-group col-4">
+                                        <div class="col-11"><label for="telefono" class="col-form-label font-weight-bold">Teléfono:</label></div>
+                                        <div class="col-11">
+                                            <input formControlName="telefono" type="text"  class="form-control " minlength="7" maxlength="10">
+                                            <span class="text-danger" *ngIf="form_p_configuracion.controls['telefono'].touched && form_p_configuracion.controls['telefono'].hasError('required')">
+                                                Teléfono es requerido! </span>
+                                            <span class="text-danger"  *ngIf="form_p_configuracion.controls['telefono'].hasError('minlength') ||form_p_configuracion.controls['telefono'].hasError('maxlength')">
+                                                <small>La longitud del campo debe ser de 7 o 10.</small>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <div class="col-11"><label for="rol" class="col-form-label font-weight-bold">Rol:</label></div>
+                                        <div class="col-11">
+                                            <input formControlName="rol" type="text" class="form-control ">
+                                            <span class="text-danger" *ngIf="form_p_configuracion.controls['rol'].touched && form_p_configuracion.controls['rol'].hasError('required')">
+                                                Rol es requerido! </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <div class="col-11"><label for="permiso" class="col-form-label font-weight-bold">Permisos:</label></div>
+                                        <div class="col-11">
+                                            <div class="card ">
+                                                <ul class="list-group list-group-flush ">
+                                                    <li class="list-group-item sizeFont lista" 
+                                                        *ngFor="let permiso of infoPermisos; let i = index"
+                                                    >
+                                                    {{ permiso.nombre }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                
+                                <div class=" mt-10 container-fluid  mt-3">
+                                    <div class="row mr-4">
+                                            <button type="submit" class="btn btnSend col-2 pt-3 pb-3 align-self-end offset-10"[disabled]="!form_p_configuracion.valid" type="submit">Guardar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

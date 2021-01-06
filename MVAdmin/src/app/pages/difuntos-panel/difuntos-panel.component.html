@@ -1,0 +1,99 @@
+<!-- <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/inicio/perfil/{{this.id.camposanto}}">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Fallecidos</li>
+  </ol>
+</nav> -->
+<div class="row ml-1 mr-1 align-items-center">
+  <div class="col-md-7 col-xs-12 col-sm-12">
+    <h1>FALLECIDOS</h1>
+  </div>
+  <div class="col-md-1 col-xs-12 col-sm-12">
+    <img class="add-icon" (click)="cambiarMetodoConexion()" src="../../../assets/icons/PUBLICAR.png" routerLink="/inicio/registrodifunto">
+  </div>
+  <div class="col-md-4 col-xs-12 col-sm-12" style="font-size: 12px; margin-top: 1px;">
+    <mat-form-field appearance="fill">
+      <input matInput type="text" (keyup)="doFilter($event.target.value)"  placeholder="Buscar">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <table mat-table [dataSource]="dataSource" matSort matSortStart="desc" class="mat-elevation-z8 punteroHand">
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+    <ng-container matColumnDef="apellido">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> APELLIDOS </th>
+      <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+    </ng-container>
+    <ng-container matColumnDef="cedula">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CÉDULA </th>
+      <td mat-cell *matCellDef="let element"> {{element.cedula}} </td>
+    </ng-container>
+    <ng-container matColumnDef="fecha_nacimiento">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA DE NACIMIENTO </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha_nacimiento | date}}</td>
+    </ng-container>
+    <ng-container matColumnDef="fecha_difuncion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA DE DEFUNCIÓN </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha_difuncion | date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Detalle">
+      <th mat-header-cell *matHeaderCellDef> DETALLE </th>
+      <td mat-cell *matCellDef="let element">
+          <mat-icon class="details-icon" (click)="selectRow(mytemplate, element)">info</mat-icon>
+      </td>
+
+    </ng-container>
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef> EDITAR </th>
+      <td mat-cell *matCellDef="let element">
+        <img (click)="redirectToUpdate(element)" src="../../../assets/icons/EDITAR.png">
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> ELIMINAR </th>
+      <td mat-cell *matCellDef="let element">
+          <mat-icon class="delete-icon" (click)="redirectToDelete(element.id)">delete</mat-icon>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row  *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+  </table>
+  <ng-template #mytemplate>
+    <div class="modal-header">
+      <h5 class="title" id="exampleModalLabel">
+        Información del fallecido
+      </h5>
+    </div>
+    <label><b>Nombres:</b> <br>{{rowID['nombre']}} {{rowID['apellido']}}</label><br>
+    <label><b>Género:</b> <br>{{rowID['genero']}}</label><br>
+    <label><b>Cédula: </b><br>{{rowID['cedula']}}</label><br>
+    <label><b>Lugar y fecha Nacimiento:</b><br> {{rowID['lugar_nacimiento']}} -
+      {{rowID['fecha_nacimiento']}}</label><br>
+    <label><b>Lugar y fecha Defunción: </b><br>{{rowID['lugar_difuncion']}} - {{rowID['fecha_difuncion']}}</label><br>
+    <label><b>Sector: </b><br>{{this.sector}}</label><br>
+    <label><b>Tipo sepultura: </b><br>{{this.sepultura}}</label><br>
+    <label><b>No. de lápida: </b><br>{{rowID['no_lapida']}}</label><br>
+    <h5 class="modal-title">
+      Información del responsable
+    </h5>
+    <label><b>Nombres del Responsable:</b> <br>{{responsable['nombre']}} {{responsable['apellido']}}</label><br>
+    <label><b>Correo del Responsable:</b><br> {{responsable['correo']}}</label><br>
+    <label><b>Dirección del Responsable:</b> <br>{{responsable['direccion']}}</label><br>
+    <label><b>Teléfonos del Responsable:</b> <br>{{responsable['telefono']}} - {{responsable['celular']}}</label><br>
+    <label><b>Parentesco del Responsable:</b> <br>{{responsable['parentezco']}}</label><br>
+
+
+
+    <div class="modal-footer">
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cerrar</button>
+      </mat-dialog-actions>
+    </div>
+  </ng-template>
+</div>

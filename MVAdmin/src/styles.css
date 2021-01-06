@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+html, body { height: 100%; }
+* { margin: 0; font-family: 'Poppins', sans-serif; }
+.cdk-overlay-container, .cdk-overlay-pane {
+    z-index: 9999 !important;
+}
